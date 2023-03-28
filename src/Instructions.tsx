@@ -1,29 +1,81 @@
 import type { ReactElement } from "react";
 
 import React from "react";
-import { CardHeader, Card, CardContent, Typography } from "@mui/material"; // Grid version 1
+import {
+  Avatar,
+  Card,
+  CardContent,
+  CardHeader,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+} from "@mui/material";
+import {
+  Assessment,
+  HighlightAlt,
+  KeyboardArrowLeft,
+  KeyboardArrowRight,
+  KeyboardArrowUp,
+} from "@mui/icons-material";
 
-function Instructions(_: Readonly<{}>): ReactElement {
+function Instructions(): ReactElement {
   return (
-    <>
-      <Card>
-        <CardHeader title="Instructions" />
-        <CardContent sx={{ alignItems: "flex-start" }}>
-          <Typography align="left" variant="body1">
-            Click on the arrows to move the robovac.
-          </Typography>
-          <Typography align="left" variant="body1">
-            Left ( &lt; ) and right ( &gt; ) will turn the vacuum
-          </Typography>
-          <Typography align="left" variant="body1">
-            Up ( ^ ) will move it forward in the direction it's facing.
-          </Typography>
-          <Typography align="left" variant="body1">
-            Report will show you the current details of the vacuum
-          </Typography>
-        </CardContent>
-      </Card>
-    </>
+    <Card>
+      <CardHeader title="Instructions" />
+      <CardContent>
+        <List>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <HighlightAlt />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText>
+              Place the Robot down by clicking a cell and then selecting a
+              direction
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <KeyboardArrowLeft />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText>Left will turn the Robot left</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <KeyboardArrowUp />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText>
+              Up will move it forward in the direction it's facing.
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <KeyboardArrowRight />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText>Right will turn the Robot right</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <Assessment />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText>
+              Report will show you the current details of the Robot (x, y,
+              direction)
+            </ListItemText>
+          </ListItem>
+        </List>
+      </CardContent>
+    </Card>
   );
 }
 

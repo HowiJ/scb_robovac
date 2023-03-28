@@ -1,18 +1,21 @@
 import type { ReactElement } from "react";
 import type { BoardState } from "./Game";
+import Position from "./Position";
 
 import React, { useMemo, useState } from "react";
 import { StyleSheet, css } from "aphrodite";
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, Stack, Typography } from "@mui/material";
 
-import Game from "./Game";
+import { Direction } from "./Position";
 import Board from "./Board";
 import Controls from "./Controls";
+import Game from "./Game";
 import Instructions from "./Instructions";
-import { Direction } from "./Position";
+import Report from "./Report";
 
-function App(_: Readonly<{}>): ReactElement {
+function App(): ReactElement {
   const game = useMemo(() => new Game(), []);
+  const [reportPosition, setReportPosition] = useState<Position | null>(null);
   const [boardState, setBoardState] = useState<BoardState>(
     game.getDrawableBoardState()
   );
@@ -21,7 +24,7 @@ function App(_: Readonly<{}>): ReactElement {
     game.update();
     setBoardState(game.getDrawableBoardState());
   }
-
+  function onPlace(x: number, y: number, direction: Direction): void {}
   function onMove() {
     game.moveActor();
     updateBoardState();
@@ -34,51 +37,66 @@ function App(_: Readonly<{}>): ReactElement {
     game.turnActorRight();
     updateBoardState();
   }
-  function onPlace(x: number, y: number, direction: Direction): void {}
+  function onReport() {
+    game.actor.report({
+      log: (x: number, y: number, direction: Direction) => {
+        setReportPosition(new Position(x, y, direction));
+        console.log(x, y, direction);
+      },
+    });
+  }
 
   return (
-    <div className={css(styles.app)}>
-      <h1>Robovac Controls</h1>
-      <Grid container>
+    <Stack paddingTop="24px" alignItems="center">
+      <Typography variant="h2">Robovac Controls</Typography>
+      <Grid item container spacing={1}>
         <Grid item xs={12} xl={6} md={6} className={css(styles.section)}>
-          <Paper elevation={1} className={css(styles.paper)}>
-            <Board state={boardState} onPlace={onPlace} />
-            <Controls
-              onReport={() => console.log("Report")}
-              onMove={onMove}
-              onTurnLeft={onMoveLeft}
-              onTurnRight={onMoveRight}
-            />
+          <Paper elevation={1}>
+            <Stack alignItems="center" gap="12px" padding="12px">
+              <Board state={boardState} onPlace={onPlace} />
+              <Controls
+                onReport={onReport}
+                onMove={onMove}
+                onTurnLeft={onMoveLeft}
+                onTurnRight={onMoveRight}
+              />
+            </Stack>
           </Paper>
         </Grid>
-        <Grid item xs={12} xl={6} md={6} className={css(styles.instruction)}>
-          <Instructions />
+        <Grid
+          item
+          xs={12}
+          xl={4}
+          md={4}
+          className={css(styles.instruction)}
+          flexDirection="column"
+          gap="10px"
+        >
+          <Stack spacing={1}>
+            <Instructions />
+            <Report position={reportPosition} />
+          </Stack>
         </Grid>
       </Grid>
-    </div>
+    </Stack>
   );
 }
 
 const styles = StyleSheet.create({
-  app: {
-    padding: "24px",
-    textAlign: "center",
-  },
-  paper: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px",
-    padding: "12px",
-  },
   section: {
-    alignItems: "center",
+    "@media(max-width: 900px)": {
+      alignItems: "center",
+    },
+    alignItems: "flex-end",
     display: "flex",
     flexDirection: "column",
     gap: "12px",
   },
   instruction: {
-    alignItems: "center",
+    "@media(max-width: 900px)": {
+      alignItems: "center",
+    },
+    alignItems: "flex-start",
     display: "flex",
     flexDirection: "column",
   },

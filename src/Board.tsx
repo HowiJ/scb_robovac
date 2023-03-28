@@ -36,8 +36,8 @@ function Board({ state, onPlace }: Props): ReactElement {
 
 const styles = StyleSheet.create({
   cell: {
-    width: "50px",
-    height: "50px",
+    width: "80px",
+    height: "80px",
     textAlign: "center",
     outline: "1px solid lightgrey",
   },
