@@ -1,12 +1,12 @@
 /** @format */
 
-import Actor from './Actor';
-import Vector from './Vector';
-import Position from './Position';
+import Actor from "./Actor";
+import Vector from "./Vector";
+import Position from "./Position";
 
 type BoardCell = 0 | Actor;
 type BoardRow = BoardCell[];
-type BoardState = BoardRow[];
+export type BoardState = BoardRow[];
 
 class Game {
   actor: Actor = new Actor();
@@ -67,7 +67,7 @@ class Game {
     this.actor.move();
   }
 
-  turnActorleft(): void {
+  turnActorLeft(): void {
     this.actor.left();
   }
   turnActorRight(): void {

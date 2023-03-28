@@ -1,17 +1,20 @@
-import type {ReactElement} from 'react';
+import type { ReactElement } from "react";
+import type { BoardState } from "./Game";
 
-import React from 'react';
-import {StyleSheet, css} from 'aphrodite';
-import Game from './Game';
+import React from "react";
+import { StyleSheet, css } from "aphrodite";
+import Game from "./Game";
 
 type Props = Readonly<{
-  game: Game,
-}>
+  state: BoardState;
+}>;
 
-function Board({game}: Props): ReactElement {
+function Board({ state }: Props): ReactElement {
   return (
-    <div><span>This is the game board</span></div>
-  )
+    <div>
+      <span>This is the game board</span>
+    </div>
+  );
 }
 
 export default Board;
