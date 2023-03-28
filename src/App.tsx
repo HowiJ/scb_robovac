@@ -1,24 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/** @format */
+
+import React, { useMemo } from 'react';
+import Game from './Game';
 
 function App() {
+  const game = useMemo(() => new Game(), []);
+  const actor = game.actor;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <div>
+        Actor: {actor.position.x} {actor.position.y} {actor.position.direction}
+      </div>
+      <div>Game: {JSON.stringify(game.boardState)}</div>
     </div>
   );
 }
