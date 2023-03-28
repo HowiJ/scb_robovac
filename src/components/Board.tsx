@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
-import type { Direction } from "./Position";
-import type { BoardState, BoardRow, BoardCell } from "./Game";
+import type { Direction } from "../lib/Position";
+import type { BoardState, BoardRow, BoardCell } from "../lib/Game";
 
 import React from "react";
 import { StyleSheet, css } from "aphrodite";

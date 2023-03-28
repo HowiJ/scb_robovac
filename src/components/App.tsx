@@ -1,15 +1,15 @@
 import type { ReactElement } from "react";
-import type { BoardState } from "./Game";
-import Position from "./Position";
+import type { BoardState } from "../lib/Game";
+import Position from "../lib/Position";
 
 import React, { useMemo, useState } from "react";
 import { StyleSheet, css } from "aphrodite";
 import { Grid, Paper, Stack, Typography } from "@mui/material";
 
-import { Direction } from "./Position";
+import { Direction } from "../lib/Position";
 import Board from "./Board";
 import Controls from "./Controls";
-import Game from "./Game";
+import Game from "../lib/Game";
 import Instructions from "./Instructions";
 import Report from "./Report";
 

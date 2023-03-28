@@ -1,11 +1,11 @@
 /** @format */
 
-import Game from '../Game';
-import Position, { Direction } from '../Position';
+import Game from "../lib/Game";
+import Position, { Direction } from "../lib/Position";
 
-describe('Game', () => {
-  describe('draws Actor', () => {
-    test('at 1,4', () => {
+describe("Game", () => {
+  describe("draws Actor", () => {
+    test("at 1,4", () => {
       const game = new Game();
       const actor = game.actor;
       actor.place(new Position(1, 4, Direction.DOWN));

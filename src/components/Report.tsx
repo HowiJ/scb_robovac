@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import type Position from "./Position";
+import type Position from "../lib/Position";
 
 import React from "react";
 import { CardHeader, Card, CardContent, Typography } from "@mui/material";

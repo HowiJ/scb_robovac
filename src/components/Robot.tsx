@@ -3,8 +3,8 @@ import type { ReactElement } from "react";
 import React from "react";
 import { StyleSheet, css } from "aphrodite";
 
-import { Direction } from "./Position";
-import Robovac from "./robovac.png";
+import { Direction } from "../lib/Position";
+import Robovac from "../static/robovac.png";
 
 type Props = Readonly<{
   direction: Direction | null;

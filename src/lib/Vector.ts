@@ -1,6 +1,6 @@
 /** @format */
 
-import { Direction } from './Position';
+import { Direction } from "./Position";
 
 class Vector {
   x: Readonly<number> = 0;

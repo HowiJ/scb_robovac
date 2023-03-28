@@ -1,12 +1,12 @@
 /** @format */
 
-import Vector from './Vector';
+import Vector from "./Vector";
 
 export enum Direction {
-  UP = 'NORTH',
-  DOWN = 'SOUTH',
-  LEFT = 'WEST',
-  RIGHT = 'EAST',
+  UP = "NORTH",
+  DOWN = "SOUTH",
+  LEFT = "WEST",
+  RIGHT = "EAST",
 }
 
 class Position {

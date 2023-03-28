@@ -1,7 +1,7 @@
 /** @format */
 
-import Actor from "../Actor";
-import Position, { Direction } from "../Position";
+import Actor from "../lib/Actor";
+import Position, { Direction } from "../lib/Position";
 
 /**
  * Tests purely the movement, no collision.
