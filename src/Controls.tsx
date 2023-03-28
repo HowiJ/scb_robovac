@@ -4,7 +4,6 @@ import React from "react";
 import { StyleSheet, css } from "aphrodite";
 import { Button, ButtonGroup } from "@mui/material";
 import {
-  KeyboardArrowDown,
   KeyboardArrowLeft,
   KeyboardArrowRight,
   KeyboardArrowUp,

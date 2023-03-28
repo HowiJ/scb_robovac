@@ -4,8 +4,8 @@ import Actor from "./Actor";
 import Vector from "./Vector";
 import Position from "./Position";
 
-type BoardCell = 0 | Actor;
-type BoardRow = BoardCell[];
+export type BoardCell = 0 | Actor;
+export type BoardRow = BoardCell[];
 export type BoardState = BoardRow[];
 
 class Game {
