@@ -5,7 +5,9 @@ import type { BoardState, BoardRow, BoardCell } from "../lib/Game";
 import React from "react";
 import { StyleSheet, css } from "aphrodite";
 
-import Robot from "./Robot";
+import Cell from "./Cell";
+
+const MAX_Y = 4;
 
 type Props = Readonly<{
   state: BoardState;
@@ -20,11 +22,12 @@ function Board({ state, onPlace }: Props): ReactElement {
           <tr key={y}>
             {row.map((cell: BoardCell, x: number) => (
               <td key={x} className={css(styles.cell)}>
-                {cell === 0 ? (
-                  ""
-                ) : (
-                  <Robot direction={cell.position?.direction ?? null} />
-                )}
+                <Cell
+                  data={cell}
+                  onSelect={(direction: Direction) =>
+                    onPlace(x, MAX_Y - y, direction)
+                  }
+                />
               </td>
             ))}
           </tr>

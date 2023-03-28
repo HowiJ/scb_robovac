@@ -32,7 +32,7 @@ function Instructions(): ReactElement {
               </Avatar>
             </ListItemAvatar>
             <ListItemText>
-              Place the Robot down by clicking a cell and then selecting a
+              Place the Robot down by clicking a cell and then select a
               direction
             </ListItemText>
           </ListItem>
@@ -69,8 +69,7 @@ function Instructions(): ReactElement {
               </Avatar>
             </ListItemAvatar>
             <ListItemText>
-              Report will show you the current details of the Robot (x, y,
-              direction)
+              Report will show you the current details of the Robot
             </ListItemText>
           </ListItem>
         </List>

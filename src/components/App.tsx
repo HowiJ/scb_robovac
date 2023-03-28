@@ -24,7 +24,10 @@ function App(): ReactElement {
     game.update();
     setBoardState(game.getDrawableBoardState());
   }
-  function onPlace(x: number, y: number, direction: Direction): void {}
+  function onPlace(x: number, y: number, direction: Direction): void {
+    game.placeActor(new Position(x, y, direction));
+    updateBoardState();
+  }
   function onMove() {
     game.moveActor();
     updateBoardState();
@@ -66,7 +69,6 @@ function App(): ReactElement {
         <Grid
           item
           xs={12}
-          xl={4}
           md={4}
           className={css(styles.instruction)}
           flexDirection="column"
@@ -74,7 +76,10 @@ function App(): ReactElement {
         >
           <Stack spacing={1}>
             <Instructions />
-            <Report position={reportPosition} />
+            <Report
+              position={reportPosition}
+              onHide={() => setReportPosition(null)}
+            />
           </Stack>
         </Grid>
       </Grid>

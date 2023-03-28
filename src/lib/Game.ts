@@ -19,6 +19,9 @@ class Game {
     [ 0, 0, 0, 0, 0 ],
   ];
 
+  MAX_X: number = this.boardState[0].length - 1;
+  MAX_Y: number = this.boardState.length - 1;
+
   /**
    * For react, we draw the board state from top left to bottom right
    * This is due to O(n^2) loop, {map(row => map(column) => cell)}
@@ -56,6 +59,15 @@ class Game {
     return this.boardState;
   }
 
+  placeActor(position: Position): void {
+    let { x, y } = position;
+    if (x < 0 || x > this.MAX_X || y < 0 || y > this.MAX_Y) {
+      return;
+    }
+
+    this.actor.place(position);
+  }
+
   moveActor(): void {
     if (this.actor.position === null) {
       return;
@@ -63,10 +75,7 @@ class Game {
     const vector = Vector.fromDirection(this.actor.position.direction);
     let { x, y } = Position.applyDirection(this.actor.position, vector);
 
-    const maxX = this.boardState[0].length - 1;
-    const maxY = this.boardState.length - 1;
-
-    if (x < 0 || x > maxX || y < 0 || y > maxY) {
+    if (x < 0 || x > this.MAX_X || y < 0 || y > this.MAX_Y) {
       return;
     }
 
