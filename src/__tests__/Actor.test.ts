@@ -1,16 +1,17 @@
 /** @format */
 
-import Actor from '../Actor';
-import Position, { Direction } from '../Position';
+import Actor from "../Actor";
+import Position, { Direction } from "../Position";
 
 /**
  * Tests purely the movement, no collision.
  * Collision will be done via the game
  */
-describe('Actor', () => {
-  describe('turn', () => {
-    test('right', () => {
+describe("Actor", () => {
+  describe("turn", () => {
+    test("right", () => {
       const actor = new Actor();
+      actor.position = Position.ZERO;
       expect([actor.position.x, actor.position.y]).toEqual([0, 0]);
       expect(actor.position.direction).toStrictEqual(Direction.UP);
       actor.right();
@@ -27,8 +28,9 @@ describe('Actor', () => {
       expect(actor.position.direction).toStrictEqual(Direction.UP);
     });
 
-    test('left', () => {
+    test("left", () => {
       const actor = new Actor();
+      actor.position = Position.ZERO;
       expect([actor.position.x, actor.position.y]).toEqual([0, 0]);
       expect(actor.position.direction).toStrictEqual(Direction.UP);
       actor.left();
@@ -46,20 +48,22 @@ describe('Actor', () => {
     });
   });
 
-  describe('place', () => {
-    test('at 1,4', () => {
+  describe("place", () => {
+    test("at 1,4", () => {
       const [x, y, direction] = [1, 4, Direction.DOWN];
       const actor = new Actor();
+      actor.place(Position.ZERO);
       expect(actor.position).toEqual(new Position(0, 0, Direction.UP));
       actor.place(new Position(x, y, direction));
       expect(actor.position).toEqual(new Position(x, y, direction));
     });
   });
 
-  describe('report', () => {
-    test('from initial', () => {
+  describe("report", () => {
+    test("from initial", () => {
       const [x, y, direction] = [5, 8, Direction.LEFT];
       const actor = new Actor();
+      actor.position = Position.ZERO;
       const logger = { log: jest.fn() };
       actor.report(logger);
       expect(logger.log).toHaveBeenLastCalledWith(0, 0, Direction.UP);
@@ -69,8 +73,8 @@ describe('Actor', () => {
     });
   });
 
-  describe('move', () => {
-    test('right', () => {
+  describe("move", () => {
+    test("right", () => {
       const actor = new Actor();
       actor.position = new Position(0, 0, Direction.RIGHT);
       expect(actor.position).toEqual(new Position(0, 0, Direction.RIGHT));
@@ -80,7 +84,7 @@ describe('Actor', () => {
       expect(actor.position).toEqual(new Position(2, 0, Direction.RIGHT));
     });
 
-    test('left', () => {
+    test("left", () => {
       const actor = new Actor();
       actor.position = new Position(5, 0, Direction.LEFT);
       expect(actor.position).toEqual(new Position(5, 0, Direction.LEFT));
@@ -90,7 +94,7 @@ describe('Actor', () => {
       expect(actor.position).toEqual(new Position(3, 0, Direction.LEFT));
     });
 
-    test('up', () => {
+    test("up", () => {
       const actor = new Actor();
       actor.position = new Position(0, 0, Direction.UP);
       expect(actor.position).toEqual(new Position(0, 0, Direction.UP));
@@ -100,7 +104,7 @@ describe('Actor', () => {
       expect(actor.position).toEqual(new Position(0, 2, Direction.UP));
     });
 
-    test('down', () => {
+    test("down", () => {
       const actor = new Actor();
       actor.position = new Position(0, 5, Direction.DOWN);
       expect(actor.position).toEqual(new Position(0, 5, Direction.DOWN));
@@ -111,8 +115,8 @@ describe('Actor', () => {
     });
   });
 
-  describe('example inputs', () => {
-    test('a [PLACE(0, 0, NORTH) -> MOVE -> REPORT -> REPORT(0, 1, NORTH)]', () => {
+  describe("example inputs", () => {
+    test("a [PLACE(0, 0, NORTH) -> MOVE -> REPORT -> REPORT(0, 1, NORTH)]", () => {
       // PLACE(0, 0, NORTH) -> MOVE -> REPORT -> REPORT(0, 1, NORTH)
       const logger = { log: jest.fn() };
       const actor = new Actor();
@@ -122,7 +126,7 @@ describe('Actor', () => {
       expect(logger.log).toHaveBeenLastCalledWith(0, 1, Direction.UP);
     });
 
-    test('b [PLACE(0, 0, NORTH) -> LEFT -> REPORT -> REPORT(0, 0, WEST)]', () => {
+    test("b [PLACE(0, 0, NORTH) -> LEFT -> REPORT -> REPORT(0, 0, WEST)]", () => {
       // PLACE(0, 0, NORTH) -> LEFT -> REPORT -> REPORT(0, 0, WEST)
       const logger = { log: jest.fn() };
       const actor = new Actor();
@@ -132,7 +136,7 @@ describe('Actor', () => {
       expect(logger.log).toHaveBeenLastCalledWith(0, 0, Direction.LEFT);
     });
 
-    test('c [PLACE(1, 2, EAST) -> MOVE -> MOVE -> LEFT -> MOVE -> REPORT(3, 3, NORTH)]', () => {
+    test("c [PLACE(1, 2, EAST) -> MOVE -> MOVE -> LEFT -> MOVE -> REPORT(3, 3, NORTH)]", () => {
       // PLACE(1, 2, EAST) -> MOVE -> MOVE -> LEFT -> MOVE -> REPORT(3, 3, NORTH)
       const logger = { log: jest.fn() };
       const actor = new Actor();

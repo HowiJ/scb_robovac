@@ -23,7 +23,7 @@ function Board({ state, onPlace }: Props): ReactElement {
                 {cell === 0 ? (
                   ""
                 ) : (
-                  <Robot direction={cell.position.direction} />
+                  <Robot direction={cell.position?.direction ?? null} />
                 )}
               </td>
             ))}

@@ -1,7 +1,7 @@
 /** @format */
 
-import Position, { Direction } from './Position';
-import Vector from './Vector';
+import Position, { Direction } from "./Position";
+import Vector from "./Vector";
 
 export enum TurnDirection {
   LEFT,
@@ -13,7 +13,7 @@ interface Logger {
 }
 
 class Actor {
-  position: Position = Position.ZERO;
+  position: null | Position = null;
 
   /**
    * Facilitates the turning direction.
@@ -21,6 +21,9 @@ class Actor {
    * @returns new direction that the player is facing
    */
   private turn(turnDirection: TurnDirection): Direction {
+    if (this.position == null) {
+      throw new Error("No Position found, need to place or set position");
+    }
     switch (this.position.direction) {
       case Direction.UP:
         return turnDirection === TurnDirection.LEFT
@@ -47,6 +50,9 @@ class Actor {
   }
 
   move(): this {
+    if (this.position === null) {
+      return this;
+    }
     const direction = this.position.direction;
     const vector = Vector.fromDirection(direction);
     const position = Position.applyDirection(this.position, vector);
@@ -56,18 +62,27 @@ class Actor {
   }
 
   left(): this {
+    if (this.position === null) {
+      return this;
+    }
     const direction = this.turn(TurnDirection.LEFT);
     this.position = new Position(this.position.x, this.position.y, direction);
     return this;
   }
 
   right(): this {
+    if (this.position === null) {
+      return this;
+    }
     const direction = this.turn(TurnDirection.RIGHT);
     this.position = new Position(this.position.x, this.position.y, direction);
     return this;
   }
 
   report(logger: Logger): void {
+    if (this.position === null) {
+      return;
+    }
     const { x, y, direction } = this.position;
     logger.log(x, y, direction);
   }

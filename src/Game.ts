@@ -37,6 +37,9 @@ class Game {
    * Updates the board state with the actor present
    */
   update(): BoardState {
+    if (this.actor.position === null) {
+      return this.boardState;
+    }
     const { x: posX, y: posY } = this.actor.position;
 
     const boardState = this.boardState.map(
@@ -54,6 +57,9 @@ class Game {
   }
 
   moveActor(): void {
+    if (this.actor.position === null) {
+      return;
+    }
     const vector = Vector.fromDirection(this.actor.position.direction);
     let { x, y } = Position.applyDirection(this.actor.position, vector);
 

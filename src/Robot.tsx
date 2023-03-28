@@ -1,14 +1,20 @@
 import type { ReactElement } from "react";
 
-import React, { useState } from "react";
-import { Direction } from "./Position";
+import React from "react";
 import { StyleSheet, css } from "aphrodite";
 
+import { Direction } from "./Position";
+import Robovac from "./robovac.png";
+
 type Props = Readonly<{
-  direction: Direction;
+  direction: Direction | null;
 }>;
 
-function Robot({ direction }: Props): ReactElement {
+function Robot({ direction }: Props): ReactElement | null {
+  if (direction == null) {
+    return null;
+  }
+
   return (
     <div
       className={css(
@@ -19,18 +25,20 @@ function Robot({ direction }: Props): ReactElement {
         direction === Direction.RIGHT && styles.right
       )}
     >
-      ^
+      <img src={Robovac} className={css(styles.img)} alt="robovac" />
     </div>
   );
 }
 
 const styles = StyleSheet.create({
+  img: {
+    width: "90%",
+    height: "90%",
+  },
   robot: {
-    transition: "0.5s linear",
+    // transition: "0.5s linear",
     height: "80%",
     width: "80%",
-    borderRadius: "100px",
-    backgroundColor: "lightgrey",
     margin: "10%",
   },
   up: { transform: "rotate(0deg)" },

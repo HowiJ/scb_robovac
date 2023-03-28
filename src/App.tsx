@@ -3,7 +3,7 @@ import type { BoardState } from "./Game";
 
 import React, { useMemo, useState } from "react";
 import { StyleSheet, css } from "aphrodite";
-import { Grid } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 
 import Game from "./Game";
 import Board from "./Board";
@@ -41,16 +41,15 @@ function App(_: Readonly<{}>): ReactElement {
       <h1>Robovac Controls</h1>
       <Grid container>
         <Grid item xs={12} xl={6} md={6} className={css(styles.section)}>
-          <Board state={boardState} onPlace={onPlace} />
-          <Controls
-            onReport={() => console.log("Report")}
-            onMove={() => {
-              onMove();
-              console.log("move");
-            }}
-            onTurnLeft={onMoveLeft}
-            onTurnRight={onMoveRight}
-          />
+          <Paper elevation={1} className={css(styles.paper)}>
+            <Board state={boardState} onPlace={onPlace} />
+            <Controls
+              onReport={() => console.log("Report")}
+              onMove={onMove}
+              onTurnLeft={onMoveLeft}
+              onTurnRight={onMoveRight}
+            />
+          </Paper>
         </Grid>
         <Grid item xs={12} xl={6} md={6} className={css(styles.instruction)}>
           <Instructions />
@@ -65,16 +64,23 @@ const styles = StyleSheet.create({
     padding: "24px",
     textAlign: "center",
   },
-  section: {
+  paper: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "column",
+    gap: "12px",
+    padding: "12px",
+  },
+  section: {
     alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
     gap: "12px",
   },
   instruction: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
   },
 });
 
